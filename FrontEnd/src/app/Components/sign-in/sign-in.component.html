@@ -1,46 +1,42 @@
 <div class="registration-form">
-    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-icon">
             <span><i class="icon icon-user"></i></span>
         </div>
-        
-   
-           <!-- Email Input -->
-           <div class="form-group">
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+        <!-- Email Input -->
+        <div class="form-group">
             <input formControlName="email" type="text" class="form-control item" placeholder="Email">
-            <small *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched">
+            <small *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
                 Email is required.
             </small>
-            <small *ngIf="signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched" class="error-message">
+            <small *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="error-message">
                 Invalid email format.
             </small>
         </div>
- 
- 
+
         <!-- Password Input -->
         <div class="form-group">
             <input formControlName="password" type="password" class="form-control item" placeholder="Password">
-            <small *ngIf="signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">
+            <small *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
                 Password is required.
             </small>
-            <small *ngIf="signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched" class="error-message">
+            <small *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched" class="error-message">
                 Minimum 8 characters required.
             </small>
         </div>
- 
-     
-       
- 
-      
- 
+
         <!-- Submit Button -->
         <div class="form-group">
-            <button type="submit" class="btn btn-block create-account" >
+            <button type="submit" class="btn btn-block create-account">
                 Sign In
             </button>
         </div>
     </form>
- 
+
     <!-- Social Media -->
     <div class="social-media">
         <h5>Sign up with social media</h5>
@@ -50,5 +46,4 @@
             <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
         </div>
     </div>
- </div>
- 
+</div>

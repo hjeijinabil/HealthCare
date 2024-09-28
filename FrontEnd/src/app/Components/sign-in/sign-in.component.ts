@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,26 +10,34 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignInComponent {
 
-  signUpForm!: FormGroup;
+  loginForm!: FormGroup;
+  errorMessage: string | null = null; // To hold the error message
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.signUpForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]], // 10 digits
-      birthDate: ['', Validators.required]
+    this.loginForm = this.fb.group({
+      email: [''],
+      password: [''],
     });
   }
 
   onSubmit(): void {
-    if (this.signUpForm.valid) {
-      console.log('Form Submitted', this.signUpForm.value);
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (response) => {
+          console.log('Login successful');
+          // Store the JWT token in localStorage
+          localStorage.setItem('jwt', response.jwt);
+          this.router.navigate(['/']); // Redirect after successful login
+        },
+        error: (err) => {
+          console.error('Login error', err);
+          this.errorMessage = err.error.error; // Capture the error message from the response
+        }
+      });
     } else {
       console.log('Form is invalid');
     }
   }
 }
-
