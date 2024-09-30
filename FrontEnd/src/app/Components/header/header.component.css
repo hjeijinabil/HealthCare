@@ -1,0 +1,137 @@
+/* Main Header Styles */
+.header-area {
+    background: linear-gradient(to right, #007bff, #6610f2); /* Gradient background */
+    position: relative;
+    z-index: 999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.main-header-area {
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95); /* Slight transparency */
+    z-index: 9999;
+}
+
+.logo a {
+    display: inline-block;
+    padding: 10px;
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.main-menu nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.main-menu nav ul li {
+    position: relative;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.main-menu nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.main-menu nav ul li a:hover {
+    color: #007bff;
+    border-bottom: 3px solid #007bff; /* Hover effect */
+}
+
+.main-menu nav ul li.dropdown {
+    position: relative;
+}
+
+.main-menu nav ul li.dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 99;
+    transition: all 0.3s ease-in-out;
+}
+
+.main-menu nav ul li.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.main-menu nav ul li.dropdown .dropdown-menu li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.main-menu nav ul li.dropdown .dropdown-menu li a {
+    color: #333;
+    font-size: 14px;
+    text-transform: none;
+}
+
+.main-menu nav ul li.dropdown .dropdown-menu li a:hover {
+    color: #007bff;
+}
+
+/* Right-side User Name and Dark Mode */
+.user-settings {
+    display: flex;
+    align-items: center;
+}
+
+.dark-mode-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.user-name {
+    font-size: px;
+    font-weight: 600;
+    color: #333;
+}
+
+.user-name:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
+    .main-menu {
+        display: none;
+    }
+    
+    .header-area {
+        padding: 10px 0;
+    }
+    
+    .logo img {
+        max-height: 40px;
+    }
+    
+    .header-area .logo a {
+        padding: 0;
+    }
+
+    .user-settings {
+        justify-content: flex-start;
+    }
+}

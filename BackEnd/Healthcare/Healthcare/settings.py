@@ -90,6 +90,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'HealthCare',
+#         'USER': 'nabil',
+#         'PASSWORD': 'hjeiji',
+#         'HOST': 'db',  # Use the service name here
+#         'PORT': '3306',
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -130,11 +141,17 @@ AUTH_USER_MODEL = 'users.User'
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Update with your frontend URL
+    "http://localhost:4200",  # Update with your frontend URL
 ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:80",  # Remplacez par l'URL de votre frontend
+]
+
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR,'Healthcare/static')
 ]
+APPEND_SLASH = False
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

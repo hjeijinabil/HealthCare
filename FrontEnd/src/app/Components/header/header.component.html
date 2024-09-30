@@ -23,21 +23,23 @@
                                     <li *ngIf="!authenticated"><a href="/signin">Login</a></li>
                                     <li *ngIf="!authenticated"><a href="/signup">Register</a></li>
 
-                                    <!-- Show logout button if authenticated -->
-                                    <li *ngIf="authenticated">
-                                        <a href="javascript:void(0)" (click)="logout()">Logout</a>
-                                    </li>
+                                   <!-- Show user dropdown if authenticated -->
+                                   <li *ngIf="authenticated" class="dropdown ml-auto" style="padding-left: 18rem;"> <!-- Added 'ml-auto' for right alignment -->
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                        {{ userName }} <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="profile">Profile</a></li>
+                                        <li><a href="javascript:void(0)" (click)="logout()">Logout</a></li>
+                                    </ul>
+                                </li>
+                                
+                                    
                                 </ul>
                             </nav>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 d-none d-lg-block">
-                        <div class="Appointment">
-                            <div class="book_btn d-none d-lg-block">
-                                <a class="popup-with-form" href="#test-form">Make an Appointment</a>
-                            </div>
-                        </div>
-                    </div>
+                   
                     <div class="col-12">
                         <div class="mobile_menu d-block d-lg-none"></div>
                     </div>

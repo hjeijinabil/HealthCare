@@ -37,5 +37,50 @@ export class AuthService {
     const token = localStorage.getItem('jwt');
     return of(!!token); // Returns true if the token exists, false otherwise
   }
+  
+    // Manually decode the JWT token (without using jwt-decode)
+  getDecodedToken(): any {
+    const token = localStorage.getItem(this.tokenKey);
+    if (token) {
+      try {
+        const base64Url = token.split('.')[1]; // Get the payload part (second part of JWT)
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Replace URL-safe chars
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload); // Convert payload to JSON object
+      } catch (error) {
+        console.error('Failed to decode token manually', error);
+        return null;
+      }
+    }
+    return null;
+  }
+
+  // Get the name from the decoded token
+  getNameFromToken(): string | null {
+    const decodedToken = this.getDecodedToken();
+    return decodedToken ? decodedToken.name : null;
+  }
+   // Replace with your actual logic to retrieve the token
+   get(): string | null {
+    return localStorage.getItem('jwt'); // Assuming you're storing the JWT in localStorage
+  }
+
+  // Method to retrieve the user ID
+  getUserId(): number | null {
+    const token = this.get();
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1])); // Decode the token
+      return payload.id || null; // Return the user ID from the payload
+    }
+    return null;
+  }
+
+  // Method to retrieve the token
+  getToken(): string | null {
+    return this.get(); // Reusing the existing get method
+  }
 
 }
