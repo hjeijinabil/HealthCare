@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
+  namespace: healthcare
 spec:
   replicas: 1
   selector:
@@ -14,23 +15,25 @@ spec:
     spec:
       containers:
         - name: backend
-          image: nabilhjeiji/backend-healthcare  # Change this to your built backend image
+          image: nabilhjeiji/backend-healthcare  # Replace with your built Django image
           ports:
             - containerPort: 8000
           env:
             - name: DEBUG
               value: "True"
             - name: DATABASE_URL
-              value: "mysql://nabil:hjeiji@db:3306/HealthCare"  # Adjust if needed
+              value: mysql://nabil:hjeiji@db:3306/HealthCare
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: backend
+  namespace: healthcare
 spec:
-  type: ClusterIP
+  type: NodePort  # Or LoadBalancer if you're using a cloud provider
   ports:
     - port: 8000
       targetPort: 8000
+      nodePort: 30080  # Optional: specify if using NodePort
   selector:
     app: backend

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+# import environ
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -90,14 +92,18 @@ DATABASES = {
     }
 }
 
+# Initialise l'environnement
+# env = environ.Env()
+# environ.Env.read_env()  # Charge le fichier .env
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'HealthCare',
-#         'USER': 'nabil',
-#         'PASSWORD': 'hjeiji',
-#         'HOST': 'db',  # Use the service name here
-#         'PORT': '3306',
+#         'NAME': 'HealthCare',        # Nom de la base de données
+#         'USER': 'nabil',             # Nom d'utilisateur pour la base de données
+#         'PASSWORD': 'hjeiji',        # Mot de passe pour l'utilisateur
+#         'HOST': 'mysql-service',     # Nom du service MySQL dans Kubernetes
+#         'PORT': '3306',              # Port MySQL
 #     }
 # }
 
@@ -145,6 +151,9 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:80",  # Remplacez par l'URL de votre frontend
+]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",  # Update with your frontend URL
 ]
 
 STATICFILES_DIRS =[

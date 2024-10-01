@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ManageProfileService } from 'src/app/services/manage-profile.service';
 import { Router } from '@angular/router'; // Import Router
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthStateServiceService } from 'src/app/services/auth-state-service.service';
 
 @Component({

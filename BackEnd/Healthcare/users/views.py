@@ -45,6 +45,7 @@ class LoginView(APIView):
             'name': user.name,  # Adding name
              'email': user.email,  # Adding email
              'age': user.age, 
+             'role':user.role,
             'phone_number': user.phone_number, # Adding age
            'gender': user.gender,  # Adding gender (make sure this field exists in your User model)
            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),  # Expiration time
