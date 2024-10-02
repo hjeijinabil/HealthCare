@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
-# import environ
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,31 +79,27 @@ WSGI_APPLICATION = 'Healthcare.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',  # Utiliser 'mysql' pour MariaDB
-        'NAME': 'HealthCare',  # Nom de votre base de données
-        'USER': 'nabil',  # Nom d'utilisateur
-        'PASSWORD': 'hjeiji',  # Mot de passe
-        'HOST': 'localhost',  # Adresse de l'hôte
-        'PORT': '3306',  # Port par défaut de MySQL
-    }
-}
-
-# Initialise l'environnement
-# env = environ.Env()
-# environ.Env.read_env()  # Charge le fichier .env
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'HealthCare',        # Nom de la base de données
-#         'USER': 'nabil',             # Nom d'utilisateur pour la base de données
-#         'PASSWORD': 'hjeiji',        # Mot de passe pour l'utilisateur
-#         'HOST': 'mysql-service',     # Nom du service MySQL dans Kubernetes
-#         'PORT': '3306',              # Port MySQL
+#         'ENGINE': 'django.db.backends.mysql',  # Utiliser 'mysql' pour MariaDB
+#         'NAME': 'HealthCare',  # Nom de votre base de données
+#         'USER': 'nabil',  # Nom d'utilisateur
+#         'PASSWORD': 'hjeiji',  # Mot de passe
+#         'HOST': 'localhost',  # Adresse de l'hôte
+#         'PORT': '3306',  # Port par défaut de MySQL
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('MYSQL_DATABASE', 'HealthCare'),  # Get database name from environment variable
+        'USER': os.getenv('MYSQL_USER', 'nabil'),            # Get user from environment variable
+        'PASSWORD': os.getenv('MYSQL_PASSWORD', 'hjeiji'),   # Get password from environment variable
+        'HOST': os.getenv('DB_HOST', 'db'),                   # Service name in Kubernetes
+        'PORT': os.getenv('DB_PORT', '3306'),                 # Default MySQL port
+    }
+}
 
 
 # Password validation
@@ -148,12 +142,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",  # Update with your frontend URL
-]
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:80",  # Remplacez par l'URL de votre frontend
-]
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",  # Update with your frontend URL
+      
+
 ]
 
 STATICFILES_DIRS =[

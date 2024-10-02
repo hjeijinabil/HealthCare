@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: healthcare
 spec:
   replicas: 1
   selector:
@@ -15,20 +14,20 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: nabilhjeiji/healthcare  # Replace with your built Angular image
+          image: nabilhjeiji/frontend  # Replace with your image
           ports:
             - containerPort: 80
 ---
+# Frontend Service
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend
-  namespace: healthcare
 spec:
-  type: NodePort  # Or LoadBalancer if you're using a cloud provider
-  ports:
-    - port: 80
-      targetPort: 80
-      nodePort: 30081  # Optional: specify if using NodePort
   selector:
     app: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer  # This exposes your service externally
