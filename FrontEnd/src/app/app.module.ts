@@ -17,7 +17,12 @@ import { ProfileComponent } from './Components/profile/profile.component';
 import { EditProfileComponent } from './Components/edit-profile/edit-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { MapComponent } from './Components/map/map.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { SocialLoginModule, SocialAuthServiceConfig,GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import {
+  GoogleLoginProvider,
+} from '@abacritt/angularx-social-login'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +35,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     DepartmentsComponent,
     ContactComponent,
     ProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    MapComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -38,11 +45,31 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSnackBarModule, // Add MatSnackBarModule here
+    MatSnackBarModule, 
+    SocialLoginModule,
+    GoogleSigninButtonModule,
+    OAuthModule.forRoot() // Initialize OAuth
+
 
     
   ],
-  providers: [],
+  providers: [ {
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            '829700418921-41kov6odt6mbba27qabl6q1b9jv4k5mm.apps.googleusercontent.com'
+          )
+        },
+      ],
+      onError: (err) => {
+        console.error(err);
+      }
+    } as SocialAuthServiceConfig,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

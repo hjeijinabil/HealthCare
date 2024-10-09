@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'oauth2_provider',  # Ajoutez le toolkit OAuth2
+
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 
@@ -79,27 +82,27 @@ WSGI_APPLICATION = 'Healthcare.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',  # Utiliser 'mysql' pour MariaDB
-#         'NAME': 'HealthCare',  # Nom de votre base de données
-#         'USER': 'nabil',  # Nom d'utilisateur
-#         'PASSWORD': 'hjeiji',  # Mot de passe
-#         'HOST': 'localhost',  # Adresse de l'hôte
-#         'PORT': '3306',  # Port par défaut de MySQL
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('MYSQL_DATABASE', 'HealthCare'),  # Get database name from environment variable
-        'USER': os.getenv('MYSQL_USER', 'nabil'),            # Get user from environment variable
-        'PASSWORD': os.getenv('MYSQL_PASSWORD', 'hjeiji'),   # Get password from environment variable
-        'HOST': os.getenv('DB_HOST', 'db'),                   # Service name in Kubernetes
-        'PORT': os.getenv('DB_PORT', '3306'),                 # Default MySQL port
+        'ENGINE': 'django.db.backends.mysql',  # Utiliser 'mysql' pour MariaDB
+        'NAME': 'HealthCare',  # Nom de votre base de données
+        'USER': 'nabil',  # Nom d'utilisateur
+        'PASSWORD': 'hjeiji',  # Mot de passe
+        'HOST': 'localhost',  # Adresse de l'hôte
+        'PORT': '3306',  # Port par défaut de MySQL
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': os.getenv('MYSQL_DATABASE', 'HealthCare'),  # Get database name from environment variable
+#         'USER': os.getenv('MYSQL_USER', 'nabil'),            # Get user from environment variable
+#         'PASSWORD': os.getenv('MYSQL_PASSWORD', 'hjeiji'),   # Get password from environment variable
+#         'HOST': os.getenv('DB_HOST', 'db'),                   # Service name in Kubernetes
+#         'PORT': os.getenv('DB_PORT', '3306'),                 # Default MySQL port
+#     }
+# }
 
 
 # Password validation
@@ -141,10 +144,15 @@ AUTH_USER_MODEL = 'users.User'
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",  # Update with your frontend URL
+    "http://localhost:4200", 
+      "http://localhost:80" # Update with your frontend URL
       
 
 ]
+OAUTH2_PROVIDER = {
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 3600,  # Durée d'expiration du token en secondes
+    'REFRESH_TOKEN_EXPIRE_SECONDS': 86400,  # Durée d'expiration du refresh token
+}
 
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR,'Healthcare/static')

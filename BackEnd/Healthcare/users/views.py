@@ -9,7 +9,15 @@ import jwt
 import datetime
 from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
+from django.contrib.auth import get_user_model
+
 from django.shortcuts import get_object_or_404
+from google.oauth2 import id_token
+from google.auth.transport import requests
+from rest_framework import status
+
+SECRET_KEY = 'your-secret-key'
+CLIENT_ID = '829700418921-41kov6odt6mbba27qabl6q1b9jv4k5mm.apps.googleusercontent.com'
 
 
 
@@ -157,3 +165,50 @@ class LogoutView(APIView):
             'message': 'Successfully logged out'
         }
         return response
+    
+
+
+
+class SigninView(APIView):
+    def post(self, request, token):
+        try:
+            if not token:
+                return Response({'error': 'Token is missing'}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Verify the token using Google's OAuth2 Client
+            id_info = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+
+            # Extract user information from the token
+            email = id_info.get('email')
+            name = id_info.get('name')
+            user_id = id_info.get('sub')
+
+            # Check if the user already exists in the database
+            try:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                # If the user doesn't exist, create a new user
+                user = User.objects.create_user(email=email, name=name, password=None)
+            payload = {
+            'id': user.id,
+            'name': user.name,  # Adding name
+             'email': user.email,  # Adding email
+             'age': user.age, 
+             'role':user.role,
+            'phone_number': user.phone_number, # Adding age
+           'gender': user.gender,  # Adding gender (make sure this field exists in your User model)
+           'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),  # Expiration time
+          'iat': datetime.datetime.utcnow()  # Issued at time
+        }
+            # Generate JWT token
+            token = jwt.encode(payload, settings.JWT_SECRET, algorithm='HS256')
+
+            return Response({'message': 'Welcome', 'token': token}, status=status.HTTP_200_OK)
+
+        except ValueError:
+            # Invalid token
+            return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
+
+        except Exception as e:
+            # Handle other exceptions
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

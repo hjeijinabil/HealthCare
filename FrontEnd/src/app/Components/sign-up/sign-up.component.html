@@ -17,14 +17,14 @@
         
         <!-- Email Input -->
         <div class="form-group">
-            <input formControlName="email" type="text" class="form-control item" placeholder="Email">
-            <small *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched">
-                Email is required.
+            <input formControlName="email" type="email" class="form-control item" placeholder="Email">
+            <small *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched" class="error-message">
+              Email is required.
             </small>
             <small *ngIf="signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched" class="error-message">
-                Invalid email format.
+              Please enter a valid email address like examplegmail.com.
             </small>
-        </div>
+          </div>
 
         <!-- Password Input -->
         <div class="form-group">
@@ -44,7 +44,7 @@
                 Phone number is required.
             </small>
             <small *ngIf="signUpForm.get('phone_number')?.hasError('pattern') && signUpForm.get('phone_number')?.touched" class="error-message">
-                Invalid phone number. Must be 10 digits.
+                Invalid phone number. Must be 8 digits.
             </small>
         </div>
 
@@ -66,6 +66,9 @@
             <small *ngIf="signUpForm.get('age')?.hasError('required') && signUpForm.get('age')?.touched" class="error-message">
                 Age is required.
             </small>
+            <small *ngIf="signUpForm.get('age')?.hasError('pattern') && signUpForm.get('age')?.touched" class="error-message">
+                Age must be a valid number.
+            </small>
         </div>
 
         <!-- Submit Button -->
@@ -75,6 +78,13 @@
             </button>
         </div>
     </form>
+
+    <!-- OAuth Sign-up Button -->
+    <div class="form-group">
+        <button class="btn btn-block" >
+            Sign Up with Google
+        </button>
+    </div>
 
     <!-- Social Media -->
     <div class="social-media">

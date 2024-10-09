@@ -24,9 +24,6 @@
             <small *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
                 Password is required.
             </small>
-            <small *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched" class="error-message">
-                Minimum 8 characters required.
-            </small>
         </div>
 
         <!-- Submit Button -->
@@ -34,16 +31,32 @@
             <button type="submit" class="btn btn-block create-account">
                 Sign In
             </button>
+           
+
         </div>
+        <asl-google-signin-button 
+        data-width="800" 
+        size="large" 
+        type="standard" 
+        text="signin_with" 
+        theme="filled_blue">
+        Sign in with Google
+    </asl-google-signin-button>
     </form>
 
     <!-- Social Media -->
     <div class="social-media">
-        <h5>Sign up with social media</h5>
+        <h5>Sign in with social media</h5>
         <div class="social-icons">
-            <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>
-            <a href="#"><i class="icon-social-google" title="Google"></i></a>
-            <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
+            <a href="javascript:void(0)" >
+                <i class="icon-social-google" title="Google"></i>
+            </a>
+            <a href="javascript:void(0)" >
+                <i class="icon-social-facebook" title="Facebook"></i>
+            </a>
+            <a href="javascript:void(0)" >
+                <i class="icon-social-github" title="GitHub"></i>
+            </a>
         </div>
     </div>
 </div>
