@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 
 
 
@@ -14,6 +14,7 @@ export class AuthService {
   private logoutUrl = 'http://localhost:8000/api/logout';     // API endpoint for logout
   private apiUrl = 'http://localhost:8000/api'; // Base URL for your API
   private tokenKey = 'jwt'; // Replace with your actual token key
+  private apiUrll = '/api/token/refresh/';  // L'URL de l'API pour rafraîchir le token
 
 
   constructor(private http: HttpClient) {}
@@ -82,5 +83,22 @@ export class AuthService {
   getToken(): string | null {
     return this.get(); // Reusing the existing get method
   }
+  // Méthode pour obtenir le refresh token depuis le localStorage
+  getRefreshToken(): string | null {
+    return localStorage.getItem('refreshToken');
+  }
 
+  // Méthode pour rafraîchir le token
+  refreshToken(): Observable<any> {
+    const refreshToken = this.getRefreshToken();
+    if (!refreshToken) {
+      return throwError('No refresh token available');
+    }
+
+    return this.http.post<any>(this.apiUrl, { refresh_token: refreshToken }).pipe(
+      catchError(err => {
+        return throwError('Failed to refresh token: ' + err.message);
+      })
+    );
+  }
 }

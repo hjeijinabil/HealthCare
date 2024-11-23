@@ -1,0 +1,66 @@
+<div class="container">
+    <h2>Advanced Symptoms Checker</h2>
+    <form id="advanced-symptoms-form">
+      <!-- Personal Information Section -->
+      <fieldset>
+        <legend>Personal Information</legend>
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+      </fieldset>
+
+      <!-- Symptoms Section -->
+      <fieldset>
+        <legend>Symptoms Details</legend>
+        <div class="form-group">
+          <label>Do you experience any of the following symptoms?</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="symptoms" value="fever"> Fever</label>
+            <label><input type="checkbox" name="symptoms" value="cough"> Cough</label>
+            <label><input type="checkbox" name="symptoms" value="fatigue"> Fatigue</label>
+            <label><input type="checkbox" name="symptoms" value="sore-throat"> Sore Throat</label>
+            <label><input type="checkbox" name="symptoms" value="shortness-of-breath"> Shortness of Breath</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="duration">How long have you been experiencing these symptoms?</label>
+          <input type="number" id="duration" name="duration" placeholder="Enter number of days" min="1" required>
+        </div>
+      </fieldset>
+
+      <!-- Additional Information -->
+      <fieldset>
+        <legend>Additional Information</legend>
+        <div class="form-group">
+          <label for="travel-history">Have you traveled recently?</label>
+          <select id="travel-history" name="travel-history" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contact-history">Have you been in contact with a sick person?</label>
+          <select id="contact-history" name="contact-history" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <!-- Submit Button -->
+      <div class="form-group">
+        <button type="submit" class="submit-btn">Submit</button>
+      </div>
+    </form>
+  </div>

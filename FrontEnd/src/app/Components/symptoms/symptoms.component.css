@@ -1,0 +1,123 @@
+/* General Reset */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Container Styling */
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form Title */
+  .container h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+  }
+  
+  /* Fieldset Styling */
+  fieldset {
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9fafc;
+  }
+  
+  legend {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #34495e;
+    padding: 0 10px;
+  }
+  
+  /* Form Group Styling */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #2d3436;
+  }
+  
+  input,
+  select,
+  button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dfe4ea;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  /* Input Focus */
+  input:focus,
+  select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    outline: none;
+  }
+  
+  /* Placeholder Styling */
+  input::placeholder {
+    color: #7f8c8d;
+    font-style: italic;
+  }
+  
+  /* Checkbox Group Styling */
+  .checkbox-group label {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: normal;
+    cursor: pointer;
+  }
+  
+  .checkbox-group input {
+    margin-right: 5px;
+  }
+  
+  /* Submit Button */
+  button.submit-btn {
+    background-color: #2ecc71;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button.submit-btn:hover {
+    background-color: #27ae60;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+  
+    legend {
+      font-size: 1rem;
+    }
+  
+    input,
+    select,
+    button {
+      font-size: 0.9rem;
+    }
+  }
+  

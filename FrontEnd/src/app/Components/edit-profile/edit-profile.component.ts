@@ -53,6 +53,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   updateProfile(): void {
+    
     if (this.signUpForm.valid) {
       const updatedUserData = {
         id: this.userId, // Include the user ID

@@ -10,6 +10,7 @@ import { ProfileComponent } from './Components/profile/profile.component';
 import { EditProfileComponent } from './Components/edit-profile/edit-profile.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { MapComponent } from './Components/map/map.component';
+import { SymptomsComponent } from './Components/symptoms/symptoms.component';
 
 const routes: Routes = [{path :"signin", component: SignInComponent},
   {path:"signup", component:SignUpComponent},
@@ -20,7 +21,9 @@ const routes: Routes = [{path :"signin", component: SignInComponent},
   {path:"profile", component:ProfileComponent},
   {path:"edit-profile", component: EditProfileComponent},
   {path:"header", component:HeaderComponent},
-  {path:"map", component:MapComponent}
+  {path:"map", component:MapComponent},
+  {path:"symptoms", component:SymptomsComponent}
+
 ];
 
 @NgModule({

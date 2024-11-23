@@ -9,7 +9,7 @@ urlpatterns = [
     path('user', UserView.as_view()),
     path('logout', LogoutView.as_view()),
     path('signin/<str:token>', SigninView.as_view(), name='signin'),
-   path('oauth2/token', TokenView.as_view(), name='token'),
+    path('token/refresh/', UserView.as_view(), name='refresh-token'),  # URL pour rafraîchir le token
 
 
 

@@ -22,7 +22,8 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { SocialLoginModule, SocialAuthServiceConfig,GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import {
   GoogleLoginProvider,
-} from '@abacritt/angularx-social-login'; 
+} from '@abacritt/angularx-social-login';
+import { SymptomsComponent } from './Components/symptoms/symptoms.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import {
     ProfileComponent,
     EditProfileComponent,
     MapComponent,
+    SymptomsComponent,
 
   ],
   imports: [
